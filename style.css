@@ -1,0 +1,146 @@
+
+/* 1. Basic settings for the entire webpage */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f7f2;
+    color: #243126;
+    line-height: 1.6;
+}
+
+/* 2. Website header */
+header {
+    background-color: #164e63;
+    color: white;
+    text-align: center;
+    padding: 28px 20px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 36px;
+}
+
+header p {
+    margin-bottom: 0;
+}
+
+/* 3. Main content area */
+main {
+    max-width: 850px;
+    margin: 35px auto;
+    padding: 28px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.07);
+}
+
+h2 {
+    color: #174c35;
+    margin-top: 0;
+}
+
+/* 4. Form labels */
+label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+}
+
+/* 5. Input fields and dropdown */
+input,
+select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #cbd5cc;
+    border-radius: 6px;
+    background-color: white;
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+/* 6. Keyboard focus */
+input:focus,
+select:focus {
+    outline: 2px solid #4b8968;
+    border-color: #4b8968;
+}
+
+/* 7. Main action button */
+button {
+    width: 100%;
+    padding: 14px;
+    margin-top: 12px;
+    border: none;
+    border-radius: 6px;
+    background-color: #24734c;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color:#164e63;
+}
+
+/* 8. Website footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    color: #526356;
+    font-size: 14px;
+}
+
+/* 9. Smaller screens, such as phones */
+@media (max-width: 600px) {
+    main {
+        margin: 18px 12px;
+        padding: 20px;
+    }
+
+    header h1 {
+        font-size: 30px;
+    }
+}
+
+#formMessage {
+    margin-top: 16px;
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+
+#landSummary {
+    margin-top: 24px;
+    padding: 20px;
+    border: 1px solid #cbd5cc;
+    border-radius: 10px;
+    background-color: #f8fbf8;
+}
+
+#landSummary h2 {
+    margin-top: 0;
+}
+
+.summary-row {
+    padding: 10px 0;
+    border-bottom: 1px solid #dce5dd;
+}
+
+.summary-label {
+    font-weight: bold;
+}
+
+.summary-note {
+    margin-top: 16px;
+    color: #526356;
+    font-size: 14px;
+}
+

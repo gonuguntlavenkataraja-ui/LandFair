@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LandFair - Fair Land Compensation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>LandFair</h1>
+        <p>Know your land. Understand your compensation.</p>
+    </header>
+
+    <main>
+        <h2>Check Your Land Compensation</h2>
+
+        <p>
+            Enter your land details to begin understanding
+            government land acquisition compensation.
+        </p>
+
+        <form id="landForm" novalidate>
+            <label for="district">District:</label>
+            <input type="text" id="district"
+                   placeholder="Enter your district" required>
+
+            <br><br>
+
+            <label for="village">Village:</label>
+            <input type="text" id="village"
+                   placeholder="Enter your village" required>
+
+            <br><br>
+
+            <label for="survey">Survey Number:</label>
+            <input type="text" id="survey"
+                   placeholder="Enter survey number" required>
+
+            <br><br>
+
+            <label for="area">Land Extent (acres):</label>
+            <input type="number" id="area"
+                   min="0" step="any"
+                   placeholder="For example, 2.5" required>
+
+            <br><br>
+
+            <label for="project">Government Project:</label>
+            <select id="project" required>
+                <option value="">Select a project</option>
+                <option value="road">Road</option>
+                <option value="railway">Railway</option>
+                <option value="port">Port</option>
+                <option value="industry">Industrial project</option>
+                <option value="other">Other</option>
+            </select>
+
+            <br><br>
+
+            <button type="submit">
+                Check Compensation
+            </button>
+        </form>
+        <section id="landSummary" hidden>
+    <h2>Land Details Summary</h2>
+    <div id="summaryContent"></div>
+</section>
+        <div id="formMessage"
+     role="status"
+     aria-live="polite"></div>
+    </main>
+
+    <footer>
+        <p>LandFair | Supporting informed landowners</p>
+    </footer>
+<script src="script.js"></script>
+</body>
+</html>
