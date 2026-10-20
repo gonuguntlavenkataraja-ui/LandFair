@@ -177,3 +177,26 @@ footer {
     }
 }
 
+/* Lesson 9: Language switcher */
+.language-switch {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 16px;
+}
+
+.language-switch button {
+    width: auto;
+    min-width: 100px;
+    margin-top: 0;
+    padding: 8px 16px;
+    border: 1px solid white;
+    background-color: transparent;
+    color: white;
+    font-size: 14px;
+}
+
+.language-switch button:hover {
+    background-color: #24734c;
+}
+

@@ -24,13 +24,19 @@ form.addEventListener("submit", function (event) {
 
     summary.hidden = true;
 
-    if (!district || !village || !survey ||
-        areaInput.value.trim() === "" || !project) {
-        message.textContent =
-            "Please complete all required fields.";
-        message.style.color = "#b42318";
-        return;
-    }
+    
+if (!district || !village || !survey ||
+    areaInput.value.trim() === "" || !project) {
+
+    message.dataset.messageType = "required";
+
+    message.textContent =
+        translations[currentLanguage].required;
+
+    message.style.color = "#b42318";
+    return;
+}
+
 
     if (!validateLandArea(area)) {
         message.textContent =
@@ -92,3 +98,171 @@ form.addEventListener("submit", function (event) {
         "Your land details have been captured successfully.";
     message.style.color = "#176b3a";
 });
+
+const translations = {
+    en: {
+        tagline: "Know your land. Understand your compensation.",
+        heading: "Check Your Land Compensation",
+        intro: "Enter your land details to begin understanding government land acquisition compensation.",
+        district: "District:",
+        village: "Village:",
+        survey: "Survey Number:",
+        area: "Land Extent (acres):",
+        project: "Government Project:",
+        selectProject: "Select a project",
+        road: "Road",
+        railway: "Railway",
+        port: "Port",
+        industry: "Industrial project",
+        other: "Other",
+        submit: "Check Compensation",
+        summaryHeading: "Land Details Summary",
+        summaryLabels: [
+            "District",
+            "Village",
+            "Survey number",
+            "Land extent",
+            "Project type"
+        ],
+        acres: "acres",
+        success: "Your land details have been captured successfully.",
+        required: "Please complete all required fields.",
+        invalidArea: "Land extent must be a number greater than zero.",
+        note: "This is a summary of your entered details, not a compensation estimate. Official valuation records and applicable acquisition rules must be verified."
+    },
+    te: {
+        tagline: "మీ భూమిని తెలుసుకోండి. పరిహారాన్ని అర్థం చేసుకోండి.",
+        heading: "మీ భూమి పరిహారాన్ని తెలుసుకోండి",
+        intro: "ప్రభుత్వ భూసేకరణ పరిహారాన్ని అర్థం చేసుకోవడానికి మీ భూమి వివరాలను నమోదు చేయండి.",
+        district: "జిల్లా:",
+        village: "గ్రామం:",
+        survey: "సర్వే నంబర్:",
+        area: "భూమి విస్తీర్ణం (ఎకరాలు):",
+        project: "ప్రభుత్వ ప్రాజెక్ట్:",
+        selectProject: "ప్రాజెక్ట్‌ను ఎంచుకోండి",
+        road: "రోడ్డు",
+        railway: "రైల్వే",
+        port: "పోర్ట్",
+        industry: "పారిశ్రామిక ప్రాజెక్ట్",
+        other: "ఇతర",
+        submit: "పరిహార వివరాలను చూడండి",
+        summaryHeading: "భూమి వివరాల సారాంశం",
+        summaryLabels: [
+            "జిల్లా",
+            "గ్రామం",
+            "సర్వే నంబర్",
+            "భూమి విస్తీర్ణం",
+            "ప్రాజెక్ట్ రకం"
+        ],
+        acres: "ఎకరాలు",
+        success: "మీ భూమి వివరాలు విజయవంతంగా నమోదు చేయబడ్డాయి.",
+        required: "దయచేసి అవసరమైన అన్ని వివరాలను నమోదు చేయండి.",
+        invalidArea: "భూమి విస్తీర్ణం సున్నా కంటే ఎక్కువగా ఉండాలి.",
+        note: "ఇది మీరు నమోదు చేసిన వివరాల సారాంశం మాత్రమే; పరిహారం అంచనా కాదు. అధికారిక భూమి విలువ రికార్డులు మరియు వర్తించే భూసేకరణ నిబంధనలను ధృవీకరించాలి."
+    }
+};
+let currentLanguage = "en";
+function setLanguage(language) {
+    const t = translations[language];
+    
+    if (!t) return;
+    currentLanguage = language;
+    document.documentElement.lang = language === "te" ? "te" : "en";
+
+    document.getElementById("tagline").textContent = t.tagline;
+    document.querySelector("main h2").textContent = t.heading;
+    document.querySelector("main > p").textContent = t.intro;
+
+    const labels = {
+        district: t.district,
+        village: t.village,
+        survey: t.survey,
+        area: t.area,
+        project: t.project
+    };
+
+    Object.keys(labels).forEach(function (id) {
+        document.querySelector('label[for="' + id + '"]').textContent =
+            labels[id];
+    });
+
+    document.getElementById("district").placeholder =
+        language === "te" ? "జిల్లా పేరును నమోదు చేయండి" : "Enter your district";
+
+    document.getElementById("village").placeholder =
+        language === "te" ? "గ్రామం పేరును నమోదు చేయండి" : "Enter your village";
+
+    document.getElementById("survey").placeholder =
+        language === "te" ? "సర్వే నంబర్ నమోదు చేయండి" : "Enter survey number";
+
+    document.getElementById("area").placeholder =
+        language === "te" ? "ఉదాహరణకు, 2.5" : "For example, 2.5";
+
+    const projectSelect = document.getElementById("project");
+    const options = projectSelect.options;
+
+    options[0].textContent = t.selectProject;
+    options[1].textContent = t.road;
+    options[2].textContent = t.railway;
+    options[3].textContent = t.port;
+    options[4].textContent = t.industry;
+    options[5].textContent = t.other;
+
+    document.querySelector('#landForm button[type="submit"]').textContent =
+        t.submit;
+
+    document.querySelector("#landSummary h2").textContent =
+        t.summaryHeading;
+
+    // Update messages if the form has already been submitted.
+    const message = document.getElementById("formMessage");
+
+    if (message.dataset.messageType === "success") {
+        message.textContent = t.success;
+    } else if (message.dataset.messageType === "required") {
+        message.textContent = t.required;
+    } else if (message.dataset.messageType === "invalidArea") {
+        message.textContent = t.invalidArea;
+    }
+
+    // Update summary labels and project type if a summary is visible.
+    const summary = document.getElementById("landSummary");
+
+    if (!summary.hidden) {
+        const rows = document.querySelectorAll("#summaryContent .summary-row");
+
+        rows.forEach(function (row, index) {
+            const label = row.querySelector(".summary-label");
+
+            if (label && t.summaryLabels[index]) {
+                label.textContent = t.summaryLabels[index] + ": ";
+            }
+
+            if (index === 3 && row.children[1]) {
+                const number = document.getElementById("area").value;
+                row.children[1].textContent = number + " " + t.acres;
+            }
+        });
+
+        const note = document.querySelector("#summaryContent .summary-note");
+
+        if (note) {
+            note.textContent = t.note;
+        }
+    }
+}
+
+document.getElementById("englishBtn").addEventListener("click", function () {
+    setLanguage("en");
+});
+
+document.getElementById("teluguBtn").addEventListener("click", function () {
+    setLanguage("te");
+});
+message.dataset.messageType = "required";
+message.textContent = "Please complete all required fields.";
+message.dataset.messageType = "success";
+message.textContent = translations[currentLanguage].success;
+message.style.color = "#176b3a";
+message.dataset.messageType = "success";
+message.textContent = "Your land details have been captured successfully.";
