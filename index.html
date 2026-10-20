@@ -22,32 +22,54 @@
             government land acquisition compensation.
         </p>
 
-        <form id="landForm" novalidate>
+        
+           
+<form id="landForm" novalidate>
+    <div class="form-grid">
+
+        <div class="form-group">
             <label for="district">District:</label>
-            <input type="text" id="district"
-                   placeholder="Enter your district" required>
+            <input
+                type="text"
+                id="district"
+                placeholder="Enter your district"
+                required
+            >
+        </div>
 
-            <br><br>
-
+        <div class="form-group">
             <label for="village">Village:</label>
-            <input type="text" id="village"
-                   placeholder="Enter your village" required>
+            <input
+                type="text"
+                id="village"
+                placeholder="Enter your village"
+                required
+            >
+        </div>
 
-            <br><br>
-
+        <div class="form-group">
             <label for="survey">Survey Number:</label>
-            <input type="text" id="survey"
-                   placeholder="Enter survey number" required>
+            <input
+                type="text"
+                id="survey"
+                placeholder="Enter survey number"
+                required
+            >
+        </div>
 
-            <br><br>
-
+        <div class="form-group">
             <label for="area">Land Extent (acres):</label>
-            <input type="number" id="area"
-                   min="0" step="any"
-                   placeholder="For example, 2.5" required>
+            <input
+                type="number"
+                id="area"
+                min="0.01"
+                step="any"
+                placeholder="For example, 2.5"
+                required
+            >
+        </div>
 
-            <br><br>
-
+        <div class="form-group full-width">
             <label for="project">Government Project:</label>
             <select id="project" required>
                 <option value="">Select a project</option>
@@ -57,13 +79,14 @@
                 <option value="industry">Industrial project</option>
                 <option value="other">Other</option>
             </select>
+        </div>
 
-            <br><br>
+    </div>
 
-            <button type="submit">
-                Check Compensation
-            </button>
-        </form>
+    <button type="submit">Check Compensation</button>
+</form>
+
+        
         <section id="landSummary" hidden>
     <h2>Land Details Summary</h2>
     <div id="summaryContent"></div>
