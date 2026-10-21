@@ -46,7 +46,11 @@ if (!district || !mandal || !village || !survey ||
         return;
     }
 
+const state = "Andhra Pradesh";
+
     const landDetails = {
+        
+        state: state,
         district: district,
         mandal: mandal,
         village: village,
@@ -70,6 +74,9 @@ if (!district || !mandal || !village || !survey ||
 };
 
     const rows = [
+        
+        [t.summaryLabels[0], currentLanguage === "te" ? "ఆంధ్రప్రదేశ్" : state],
+
         ["District", landDetails.district],
        ["Mandal", landDetails.mandal], 
         ["Village", landDetails.village],
@@ -147,6 +154,10 @@ const translations = {
         nonAgricultural: "Non-agricultural",
         mandal: "Mandal:",
         mandalPlaceholder: "Enter your mandal",
+        
+        state: "State:",
+        stateName: "Andhra Pradesh",
+
         note: "This is a summary of your entered details, not a compensation estimate. Official valuation records and applicable acquisition rules must be verified."
     },
     te: {
@@ -183,6 +194,10 @@ const translations = {
         nonAgricultural: "వ్యవసాయేతర భూమి",
         mandal: "మండలం:",
         mandalPlaceholder: "మీ మండలాన్ని నమోదు చేయండి",
+        
+        state: "రాష్ట్రం:",
+        stateName: "ఆంధ్రప్రదేశ్",
+
         note: "ఇది మీరు నమోదు చేసిన వివరాల సారాంశం మాత్రమే; పరిహారం అంచనా కాదు. అధికారిక భూమి విలువ రికార్డులు మరియు వర్తించే భూసేకరణ నిబంధనలను ధృవీకరించాలి."
     }
 };
@@ -193,6 +208,9 @@ function setLanguage(language) {
     if (!t) return;
     currentLanguage = language;
     document.documentElement.lang = language === "te" ? "te" : "en";
+
+document.getElementById("stateLabel").textContent = t.state;
+document.getElementById("state").value = t.stateName;
 
     document.getElementById("tagline").textContent = t.tagline;
     document.querySelector("main h2").textContent = t.heading;
@@ -218,6 +236,9 @@ function setLanguage(language) {
         document.querySelector('label[for="' + id + '"]').textContent =
             labels[id];
     });
+
+    
+
 
     document.getElementById("district").placeholder =
         language === "te" ? "జిల్లా పేరును నమోదు చేయండి" : "Enter your district";
