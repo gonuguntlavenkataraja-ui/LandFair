@@ -16,6 +16,7 @@ form.addEventListener("submit", function (event) {
     event.preventDefault();
 
     const district = document.getElementById("district").value.trim();
+    const mandal = document.getElementById("mandal").value.trim();
     const village = document.getElementById("village").value.trim();
     const survey = document.getElementById("survey").value.trim();
     const areaInput = document.getElementById("area");
@@ -25,7 +26,7 @@ form.addEventListener("submit", function (event) {
     summary.hidden = true;
 
     
-if (!district || !village || !survey ||
+if (!district || !mandal || !village || !survey ||
     areaInput.value.trim() === "" || !project || !landCategory) {
 
     message.dataset.messageType = "required";
@@ -47,6 +48,7 @@ if (!district || !village || !survey ||
 
     const landDetails = {
         district: district,
+        mandal: mandal,
         village: village,
         surveyNumber: survey,
         areaAcres: area,
@@ -69,6 +71,7 @@ if (!district || !village || !survey ||
 
     const rows = [
         ["District", landDetails.district],
+       ["Mandal", landDetails.mandal], 
         ["Village", landDetails.village],
         ["Survey number", landDetails.surveyNumber],
         ["Land extent", landDetails.areaAcres + " acres"],
@@ -142,6 +145,8 @@ const translations = {
         selectLandCategory: "Select land category",
         agricultural: "Agricultural",
         nonAgricultural: "Non-agricultural",
+        mandal: "Mandal:",
+        mandalPlaceholder: "Enter your mandal",
         note: "This is a summary of your entered details, not a compensation estimate. Official valuation records and applicable acquisition rules must be verified."
     },
     te: {
@@ -176,6 +181,8 @@ const translations = {
         selectLandCategory: "భూమి వర్గాన్ని ఎంచుకోండి",
         agricultural: "వ్యవసాయ భూమి",
         nonAgricultural: "వ్యవసాయేతర భూమి",
+        mandal: "మండలం:",
+        mandalPlaceholder: "మీ మండలాన్ని నమోదు చేయండి",
         note: "ఇది మీరు నమోదు చేసిన వివరాల సారాంశం మాత్రమే; పరిహారం అంచనా కాదు. అధికారిక భూమి విలువ రికార్డులు మరియు వర్తించే భూసేకరణ నిబంధనలను ధృవీకరించాలి."
     }
 };
@@ -240,6 +247,11 @@ function setLanguage(language) {
     document.querySelector("#landSummary h2").textContent =
         t.summaryHeading;
 
+    document.querySelector('label[for="mandal"]').textContent =
+    t.mandal;
+
+    document.getElementById("mandal").placeholder =
+    t.mandalPlaceholder;
     // Update messages if the form has already been submitted.
     const message = document.getElementById("formMessage");
 
