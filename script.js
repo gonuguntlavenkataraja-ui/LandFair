@@ -21,12 +21,12 @@ form.addEventListener("submit", function (event) {
     const areaInput = document.getElementById("area");
     const area = Number(areaInput.value);
     const project = document.getElementById("project").value;
-
+    const landCategory = document.getElementById("landCategory").value;
     summary.hidden = true;
 
     
 if (!district || !village || !survey ||
-    areaInput.value.trim() === "" || !project) {
+    areaInput.value.trim() === "" || !project || !landCategory) {
 
     message.dataset.messageType = "required";
 
@@ -50,7 +50,8 @@ if (!district || !village || !survey ||
         village: village,
         surveyNumber: survey,
         areaAcres: area,
-        projectType: project
+        projectType: project,
+        landCategory: landCategory
     };
 
     const projectNames = {
@@ -61,12 +62,21 @@ if (!district || !village || !survey ||
         other: "Other"
     };
 
+    const categoryNames = {
+    agricultural: translations[currentLanguage].agricultural,
+    "non-agricultural": translations[currentLanguage].nonAgricultural
+};
+
     const rows = [
         ["District", landDetails.district],
         ["Village", landDetails.village],
         ["Survey number", landDetails.surveyNumber],
         ["Land extent", landDetails.areaAcres + " acres"],
-        ["Project type", projectNames[landDetails.projectType]]
+        ["Project type", projectNames[landDetails.projectType]],
+        [
+    translations[currentLanguage].landCategory.replace(/:$/, ""),
+    categoryNames[landDetails.landCategory]
+]
     ];
 
     summaryContent.replaceChildren();
@@ -128,6 +138,10 @@ const translations = {
         success: "Your land details have been captured successfully.",
         required: "Please complete all required fields.",
         invalidArea: "Land extent must be a number greater than zero.",
+        landCategory: "Land Category:",
+        selectLandCategory: "Select land category",
+        agricultural: "Agricultural",
+        nonAgricultural: "Non-agricultural",
         note: "This is a summary of your entered details, not a compensation estimate. Official valuation records and applicable acquisition rules must be verified."
     },
     te: {
@@ -158,6 +172,10 @@ const translations = {
         success: "మీ భూమి వివరాలు విజయవంతంగా నమోదు చేయబడ్డాయి.",
         required: "దయచేసి అవసరమైన అన్ని వివరాలను నమోదు చేయండి.",
         invalidArea: "భూమి విస్తీర్ణం సున్నా కంటే ఎక్కువగా ఉండాలి.",
+        landCategory: "భూమి వర్గం:",
+        selectLandCategory: "భూమి వర్గాన్ని ఎంచుకోండి",
+        agricultural: "వ్యవసాయ భూమి",
+        nonAgricultural: "వ్యవసాయేతర భూమి",
         note: "ఇది మీరు నమోదు చేసిన వివరాల సారాంశం మాత్రమే; పరిహారం అంచనా కాదు. అధికారిక భూమి విలువ రికార్డులు మరియు వర్తించే భూసేకరణ నిబంధనలను ధృవీకరించాలి."
     }
 };
@@ -173,6 +191,14 @@ function setLanguage(language) {
     document.querySelector("main h2").textContent = t.heading;
     document.querySelector("main > p").textContent = t.intro;
 
+    const categorySelect = document.getElementById("landCategory");
+
+    categorySelect.options[0].textContent = t.selectLandCategory;
+    categorySelect.options[1].textContent = t.agricultural;
+    categorySelect.options[2].textContent = t.nonAgricultural;
+
+    document.querySelector('label[for="landCategory"]').textContent =
+        t.landCategory;
     const labels = {
         district: t.district,
         village: t.village,
