@@ -26,6 +26,18 @@ form.addEventListener("submit", function (event) {
     summary.hidden = true;
 
     
+console.log("LandFair form values:", {
+    district: district,
+    mandal: mandal,
+    village: village,
+    survey: survey,
+    area: areaInput.value,
+    project: project,
+    landCategory: landCategory
+});
+
+
+    
 if (!district || !mandal || !village || !survey ||
     areaInput.value.trim() === "" || !project || !landCategory) {
 
@@ -75,7 +87,8 @@ const state = "Andhra Pradesh";
 
     const rows = [
         
-        [t.summaryLabels[0], currentLanguage === "te" ? "ఆంధ్రప్రదేశ్" : state],
+       [translations[currentLanguage].summaryLabels[0],
+ currentLanguage === "te" ? "ఆంధ్రప్రదేశ్" : state],
 
         ["District", landDetails.district],
        ["Mandal", landDetails.mandal], 
