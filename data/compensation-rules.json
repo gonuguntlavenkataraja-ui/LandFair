@@ -1,0 +1,38 @@
+
+{
+  "title": "LandFair Compensation Rules Checklist",
+  "jurisdiction": "Andhra Pradesh, India",
+  "lastReviewed": null,
+  "rules": [
+    {
+      "id": "market-value",
+      "question": "How is market value determined for this acquisition?",
+      "sourceReference": "",
+      "status": "not_verified"
+    },
+    {
+      "id": "multiplier",
+      "question": "Does a multiplier apply, and which one is legally applicable?",
+      "sourceReference": "",
+      "status": "not_verified"
+    },
+    {
+      "id": "assets-and-damages",
+      "question": "Which assets, damages, or other components are applicable?",
+      "sourceReference": "",
+      "status": "not_verified"
+    },
+    {
+      "id": "additional-amounts",
+      "question": "Which additional statutory amounts or interest provisions apply?",
+      "sourceReference": "",
+      "status": "not_verified"
+    },
+    {
+      "id": "special-rules",
+      "question": "Do special laws, notifications, or acquisition-specific rules apply?",
+      "sourceReference": "",
+      "status": "not_verified"
+    }
+  ]
+}

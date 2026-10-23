@@ -1,0 +1,7 @@
+
+backend/.venv/
+backend/landfair.db
+backend/landfair.db-journal
+backend/landfair.db-shm
+backend/landfair.db-wal
+__pycache__/

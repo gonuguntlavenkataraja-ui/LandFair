@@ -127,6 +127,7 @@ const state = "Andhra Pradesh";
     summaryContent.appendChild(note);
 
     summary.hidden = false;
+    updateMarketValueStatus(landDetails);
     message.textContent =
         "Your land details have been captured successfully.";
     message.style.color = "#176b3a";
@@ -338,3 +339,68 @@ message.textContent = translations[currentLanguage].success;
 message.style.color = "#176b3a";
 message.dataset.messageType = "success";
 message.textContent = "Your land details have been captured successfully.";
+
+
+
+
+async function updateMarketValueStatus(landDetails) {
+    const status = document.getElementById("marketValueStatus");
+
+    status.textContent =
+        currentLanguage === "te"
+            ? "మార్కెట్ విలువ వివరాలను పరిశీలిస్తున్నాము..."
+            : "Checking market-value records...";
+
+    try {
+        const params = new URLSearchParams({
+            district: landDetails.district,
+            mandal: landDetails.mandal,
+            village: landDetails.village,
+            land_category: landDetails.landCategory
+        });
+
+        const response = await fetch(
+            `http://127.0.0.1:8000/market-value?${params}`
+        );
+
+        if (!response.ok) {
+            throw new Error("The market-value API request failed.");
+        }
+
+        const data = await response.json();
+
+        if (
+            data.status !== "verified_record_found" ||
+            !Array.isArray(data.records) ||
+            data.records.length === 0
+        ) {
+            status.textContent =
+                currentLanguage === "te"
+                    ? "ధృవీకరించిన మార్కెట్ విలువ సమాచారం అందుబాటులో లేదు. పరిహారం అంచనా ఇవ్వలేము."
+                    : "Verified market-value data is unavailable. A compensation estimate cannot be provided.";
+
+            return;
+        }
+
+        const record = data.records[0];
+
+        status.textContent =
+            currentLanguage === "te"
+                ? `ధృవీకరించిన మార్కెట్ విలువ: ₹${record.rate.toLocaleString("en-IN")} ${record.unit}. ఇది తుది పరిహారం మొత్తం కాదు.`
+                : `Verified market value: ₹${record.rate.toLocaleString("en-IN")} ${record.unit}. This is not the final compensation amount.`;
+
+    } catch (error) {
+        console.error("Market-value API error:", error);
+
+        status.textContent =
+            currentLanguage === "te"
+                ? "మార్కెట్ విలువ వివరాలను లోడ్ చేయలేకపోయాము. దయచేసి మళ్లీ ప్రయత్నించండి."
+                : "Could not load market-value data. Please try again.";
+    }
+}
+
+
+function resultRecordRate(record) {
+    return record.rate.toLocaleString("en-IN");
+}
+

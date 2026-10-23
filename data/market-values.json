@@ -1,0 +1,21 @@
+
+{
+  "source": "Andhra Pradesh Registration and Stamps Department",
+  "lastChecked": null,
+  "records": [{
+      "id": "REPLACE_WITH_RECORD_ID",
+      "state": "Andhra Pradesh",
+      "district": "",
+      "mandal": "",
+      "village": "",
+      "surveyNumber": null,
+      "landCategory": "",
+      "landClassification": "",
+      "rate": null,
+      "unit": "",
+      "effectiveFrom": null,
+      "effectiveTo": null,
+      "sourceReference": "",
+      "verificationStatus": "unverified"
+    }]
+}
